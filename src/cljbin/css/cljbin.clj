@@ -279,6 +279,24 @@
      :margin-bottom (px vr)
      ]
 
+    [:code
+     :color :#E8E8E8
+     ]
+
+    [:div.code
+     [:pre
+      :padding [(px (/ vr 2.0)) (px vr)]
+      :width "100%"
+      :background-color (hsla 0 0 0 0.2)
+      (linear-gradient [:bottom (hsla 0 0 20 0.4) (hsla 0 0 15 0.4)])
+      (background-clip :padding-box)
+      (box-shadow [0 :1px (hsla 0 0 100 0.2)] [:inset 0 0 :3px :2px :#000])
+      (box-sizing :border-box)
+      :color :#FFF
+      :font-family "'Menlo', 'Menlo-Regular', 'Deja Vu Sans Mono', 'Inconsolata', Monaco, monospace"
+      ]
+     ]
+
     ; Headings
     ["h1, h2, h3, h4, h5, h6"
      :font-weight 600
@@ -362,6 +380,11 @@
       (text-shadow [0 :1px :2px :#000])
       :-webkit-appearance :none
       ]
+     ]
+
+    ; Output
+    [:ul.output
+     :color :#E8E8E8
      ]
 
     ; Actions

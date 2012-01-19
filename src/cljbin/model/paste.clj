@@ -1,13 +1,15 @@
 (ns cljbin.model.paste
-  (:require [somnium.congomongo :as cm])
+  (:require [cljbin.eval :as eval]
+            [somnium.congomongo :as cm])
   (:import java.util.Date))
 
-(def ^{:private true} valid-keys [:code :fork-of :private :session :expires-at :created-at :updated-at])
+(def ^{:private true} valid-keys [:code :output :fork-of :private :session :expires-at :created-at :updated-at])
 
 (defn create! [paste]
   (if paste
     (if (:code paste)
       (cm/insert! :pastes (assoc (select-keys paste valid-keys)
+                                 :output (eval/run (:code paste))
                                  :created-at (Date.)
                                  :updated-at (Date.)))
       (throw (IllegalArgumentException. "Pastes must contain code")))

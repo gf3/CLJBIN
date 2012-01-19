@@ -5,6 +5,7 @@
                  [aleph "0.2.1-SNAPSHOT"]
                  [ciste "0.2.0-SNAPSHOT"]
                  [clj-time "0.3.4"]
+                 [clojail "0.5.1"]
                  [com.evocomputing/colors "1.0.0-SNAPSHOT"]
                  [compojure "1.0.0"]
                  [congomongo "0.1.7"]
@@ -20,5 +21,6 @@
   :main cljbin.core
   :warn-on-reflection false
   :jvm-opts ["-server"
-             "-XX:MaxPermSize=1024m"])
+             "-XX:MaxPermSize=1024m"
+             "-Djava.security.policy=example.policy"])
 

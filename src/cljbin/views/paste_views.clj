@@ -45,6 +45,11 @@
                [:code
                 (:code paste)]]]
 
+             [:ul.output
+              (for [out (:output paste)]
+                [:li
+                 [:pre out]])]
+
              [:ul.actions
               [:li (submit-button "Fork")]])
      ))

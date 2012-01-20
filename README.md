@@ -6,5 +6,12 @@ A Clojure pastebin with code evaluation.
 Requirements
 ------------
 
-A running MongoDB instance.
+- Leiningen
+- A running MongoDB instance.
+
+Running
+-------
+
+    $ lein deps
+    $ lein run
 

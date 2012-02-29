@@ -7,12 +7,12 @@
 
 (def ^{:private true} css
   "@font-face {
-    font-family: 'HomesteadRegular';
-    src: url('/fonts/homestead-regular-webfont.eot');
-    src: url('/fonts/homestead-regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/fonts/homestead-regular-webfont.woff') format('woff'),
-         url('/fonts/homestead-regular-webfont.ttf') format('truetype'),
-         url('/fonts/homestead-regular-webfont.svg#HomesteadDisplay') format('svg');
+    font-family: 'SegoeUINormal';
+    src: url('/fonts/segoeui-webfont.eot');
+    src: url('/fonts/segoeui-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/segoeui-webfont.woff') format('woff'),
+         url('/fonts/segoeui-webfont.ttf') format('truetype'),
+         url('/fonts/segoeui-webfont.svg#SegoeUINormal') format('svg');
     font-weight: normal;
     font-style: normal;
   }")
@@ -26,19 +26,22 @@
             [:meta {:content "width=device-width, initial-scale=1" :name "viewport"}]
             [:title "cljbin"]
             [:style css]
+            (include-css "http://fonts.googleapis.com/css?family=Droid+Sans+Mono")
             (include-css "/css/normalize.css")
             (include-css "/css/cljbin.css")
-            (include-css "http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600")
+            (include-css "/css/shThemeTomorrow.css")
+            (include-css "/css/shClojureExtra.css")
             ]
            [:body
+            [:header {:role "banner"} 
+             (link-to "/" [:h1 "cljbin"])]
             [:section#paste
-             [:header
-              [:h1 "Clojure Bin"]
-              ]
-             content
-             ]
+             content]
             [:footer
-             [:p "&#955; Clojure Bin."]]])))
+             [:p "&#955; Clojure Bin"]]
+            (include-js "/js/vendor/shCore.js")
+            (include-js "/js/vendor/shBrushClojure.js")
+            (include-js "/js/main.js")])))
 
 (defn hidden-csrf-field []
   (hidden-field '__anti-forgery-token *anti-forgery-token*))

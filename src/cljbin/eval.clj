@@ -11,8 +11,8 @@
   (binding [*read-eval* false]
     (read-string s)))
 
-; A gracious thank you to amalloy on #clojure for the following fn
-(defn read-string-safely [s]
+; A gracious thank you to amalloy in #clojure for the following fn
+(defn- read-string-safely [s]
   (binding [*read-eval* false]
     (with-in-str s
       (let [end (Object.)]
@@ -23,14 +23,8 @@
   (sandbox (into secure-tester-without-def #{'sandbox.core})
            :timeout 5000
            :init '(do
-                    (use '[clojure.repl :rename {doc repl-doc}] 'clojure.set 'clojure.test)
-                    (require '[clojure.string :as string])
-                    (defmacro doc [form]
-                      `(when-let [output# (with-out-str (repl-doc ~form))]
-                         (-> output# (string/replace "-" "")
-                                     (string/replace "\n" " ")
-                                     (string/replace #"\s+" " ")
-                                     string/trim))))))
+                    (use 'clojure.repl 'clojure.set 'clojure.test)
+                    (require '[clojure.string :as string]))))
 
 (defn run [code-string]
   (try
@@ -44,5 +38,4 @@
           (string/trim (str output res)))))
     (catch TimeoutException _ "Execution timed out!")
     (catch Exception e (-> e root-cause str))))
-
 

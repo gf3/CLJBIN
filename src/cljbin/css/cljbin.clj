@@ -12,7 +12,7 @@
 (def vendors ["-moz-" "-ms-" "-o-" "-webkit-"])
 
 (defn vendorify [prop value]
-  (flatten 
+  (flatten
     (map #(list (str % (name prop)) value)
          (concat vendors '("")))))
 
@@ -200,11 +200,39 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Base
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn transition-delay
+  [& delays]
+  (vendorify :transition-delay
+             (comma-sep delays)))
+
+(defn transition-duration
+  [& durations]
+  (vendorify :transition-duration
+             (comma-sep durations)))
+
+(defn transition-property
+  [& properties]
+  (vendorify :transition-property
+             (comma-sep properties)))
+
+(defn transition-timing-function
+  [& functions]
+  (vendorify :transition-timing-function
+             (comma-sep functions)))
+
+(defn transition
+  [& transitions]
+  (vendorify :transition
+             (comma-sep transitions)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Base
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (def ^:dynamic *base*
-  {:font-family "'Open Sans', 'Lucida Grande', sans-serif"
-   :font-size 16
-   :font-weight 600
-   :color       (create-color {:h 0   :s 0  :l 27})
+  {:font-family "MyriadPro-Regular, 'Myriad Pro Regular', MyriadPro, 'Myriad Pro', Calibri, sans-serif"
+   :font-size   14
+   :font-weight "normal"
+   :color       (create-color {:h 80  :s 2  :l 34})
    :accent      (create-color {:h 216 :s 38 :l 56})
    :accent-two  (create-color "#FFC660")
    })
@@ -230,19 +258,19 @@
   ([factor]
    (list :line-height (px (* factor vr)))))
 
-; (defn font []
-  ; (list :font (string/join " " (list (:font-weight *base*)
-                                     ; (str (font-size) "/" (line-height))
-                                     ; (:font-family *base*)))))
-
-(defn homestead-regular []
-  (list :font-family "'HomesteadRegular', sans-serif"
-        :font-style "normal"
+(defn segoe-ui []
+  (list :font-family "'SegoeUINormal', sans-serif"
+        :font-style  "normal"
         :font-weight "normal"))
 
-(defn open-sans []
-  (list :font-family "'Open Sans', 'Lucida Grande', sans-serif"
-        :font-style "normal"
+(defn myriad []
+  (list :font-family "MyriadPro-Regular, 'Myriad Pro Regular', MyriadPro, 'Myriad Pro', Calibri, sans-serif"
+        :font-style  "normal"
+        :font-weight "normal"))
+
+(defn monospace []
+  (list :font-family "'Droid Sans Mono', monospace, sans-serif"
+        :font-style  "normal"
         :font-weight 400))
 
 (defn link-color []
@@ -255,23 +283,23 @@
   (css
     ; Base
     [:html
-     ; :background-color :#3A3A3A
      ]
 
     [:body
-     :margin [0 :auto]
-     :width :960px
-     :background-color :#3A3A3A
-     :background-color :#E7E7E7
-     :background-color :#A5A5A5
-     :background-image (image-url "paint.png")
-     :background-repeat :no-repeat
-     :background-position [:center :top]
+     :margin 0
+     :padding 0
+     :height "100%"
      :color (hsl (:color *base*))
-     (font-family)
+     (segoe-ui)
      (font-size)
      (font-weight)
      (line-height)
+     ]
+
+    ["html, body"
+     :background-color :#E8E8E8
+     (linear-gradient ["left top" :#8494ad :#d69baf])
+     :background-attachment :fixed
      ]
 
     ["p, ul, ol, dl, pre"
@@ -279,71 +307,53 @@
      :margin-bottom (px vr)
      ]
 
-    [:code
-     :color :#E8E8E8
+    ["code, pre"
+     (monospace)
      ]
 
-    [:div.code
-     [:pre
-      :padding [(px (/ vr 2.0)) (px vr)]
-      :width "100%"
-      :background-color (hsla 0 0 0 0.2)
-      (linear-gradient [:bottom (hsla 0 0 20 0.4) (hsla 0 0 15 0.4)])
-      (background-clip :padding-box)
-      (box-shadow [0 :1px (hsla 0 0 100 0.2)] [:inset 0 0 :3px :2px :#000])
-      (box-sizing :border-box)
-      :color :#FFF
-      :font-family "'Menlo', 'Menlo-Regular', 'Deja Vu Sans Mono', 'Inconsolata', Monaco, monospace"
-      ]
-     ]
+    ; Links
+    [:a
+     (transition [:all :0.2s :ease-out])
+
+     ["&:link"
+      :color :#CF2F0B
+      :text-decoration :none]
+
+     ["&:hover"
+      :text-decoration :none
+      ]]
 
     ; Headings
     ["h1, h2, h3, h4, h5, h6"
-     :font-weight 600
-     :color :#F3F2F2
+     (segoe-ui)
+     :font-weight "normal"
      ]
 
     [:h1
-     (font-size 1.8)
-     (line-height 3)
+     :display :inline-block
+     :margin 0
+     :color :#FBFBFB
+     (font-size 2.4)
      ]
 
     [:h2
      ]
 
     ; Header
-    [:header
-      ]
+    ["header[role=banner]"
+     :margin-top :50px
+     :margin-left :50px
+     :margin-left (px (+ 50 vr))
+     ]
 
     ; Paste
     [:section#paste
-     :margin-top (px (* 2 vr))
+     :position :relative
+     :margin :50px
      :padding 0
-     :background-color :#1B1B1B
-     :background-image (image-url "bkg.png")
-     (border-radius :8px)
-     (box-shadow [0 :1px :3px (hsla 0 0 0 0.6)] [:inset 0 :2px (hsla 0 0 100 0.3)] [:inset 0 :-2px 0 :#1B1B1B])
-     (text-shadow [0 :1px :2px :#000])
-     :overflow :hidden
-
-     [:header
-      :height (px (* vr 3))
-      (border-top-radius :8px)
-      :background-color (hsla 0 0 40 0.7)
-      (linear-gradient [:top (hsla 0 0 40 0.7) (hsla 0 0 15 0.7)])
-      (box-shadow [:inset 0 :1px (hsla 0 0 100 0.5)] [:inset 0 :-2px 0 :#111])
-
-      [:h1
-       :margin 0
-       :text-align :center
-       (text-shadow [0 :-1px :#FFF] [0 :2px :3px :#000])
-       ]
-      ]
-
-     [:p
-      :padding [0 (px vr)]
-      :color :#FFF
-      ]
+     :background-color :#FBFBFB
+     (box-shadow [0 0 :10px (hsla 0 0 0 0.25)])
+     (box-sizing :border-box)
      ]
 
     [:form
@@ -351,65 +361,124 @@
 
      [:textarea
       :display :block
-      :padding [(px (/ vr 2.0)) (px vr)]
+      :margin 0
+      :padding (px vr)
+      :padding-bottom 0
       :width "100%"
-      :min-height :350px
-      :border 0
-      (border-radius :3px)
-      :background-color (hsla 0 0 0 0.2)
-      (linear-gradient [:bottom (hsla 0 0 20 0.4) (hsla 0 0 15 0.4)])
-      (background-clip :padding-box)
-      (box-shadow [0 :1px (hsla 0 0 100 0.2)] [:inset 0 0 :3px :2px :#000])
+      :min-height (px (* 15 vr))
+      :border :none
       (box-sizing :border-box)
-      :color :#FFF
-      :font-family "'Menlo', 'Menlo-Regular', 'Deja Vu Sans Mono', 'Inconsolata', Monaco, monospace"
+      :background-color :transparent
       :resize :none
+      :color :#585856
+      (monospace)
+      (transition [:all :0.2s :ease-out])
+      :-webkit-appearance :none
+
+      ["&:focus"
+       :outline :none]
       ]
 
      ["input[type=submit], button"
-      :padding [0 (px (/ vr 2))]
-      :background-color (hsla 0 0 40 0.7)
-      (linear-gradient [:top (hsla 0 0 60 0.7) (hsla 0 0 30 0.7)])
-      :border [:2px :solid (hsl 0 0 20)]
-      (box-shadow [0 :1px :#FFF] [:inset 0 :-1px (hsla 0 0 100 0.1)] [:inset 0 :2px (hsla 0 0 40 0.7)] [:inset 0 :3px (hsla 0 0 100 0.7)])
-      (border-radius :8px)
-      (box-sizing :border-box)
-      :color :#FFF
-      (font-size 1.1)
-      (line-height 2)
-      (text-shadow [0 :1px :2px :#000])
       :-webkit-appearance :none
       ]
      ]
 
+    ; Code
+    [:div.code
+     :display :block
+     :margin 0
+     :width "100%"
+     :min-height (px (* 15 vr))
+     (box-sizing :border-box)
+
+     [:.syntaxhighlighter
+      :padding [(px vr) 0]
+      [:table
+       :width "100%"
+       [:.line
+        :padding [0 (px vr)]]]]
+     ]
+
     ; Output
     [:ul.output
-     :color :#E8E8E8
+     :margin 0
+     :padding (px vr)
+     :padding-top 0
+     :border-top [(px 1) :solid :#E9E9E9]
+     :list-style-type :none
+
+     [:li
+      :margin 0
+      :padding 0
+
+      ["&:last-child"
+       [:pre
+        :margin-bottom 0]]
+      ]
      ]
 
     ; Actions
     [:ul.actions
+     :position :absolute
+     :top 0
+     :right 0
      :margin 0
-     :padding (px vr)
+     :padding [0 (px vr)]
+     :border-left [(px 1) :solid :#E9E9E9]
      :list-style-type :none
-     :background-color :#F7F7F7
-     (linear-gradient [:bottom "hsl(240, 14%, 90%)" "hsla(240, 14%, 90%, 0) 30px"])
-     (box-shadow [:inset 0 :2px (hsl 0 0 100)])
-     :overflow :hidden
 
      [:li
       :display :inline
-      :margin 0
-      :padding 0
-      :float :right
-      ]
+
+      ["a, input"
+       :display :inline-block
+       :padding (px vr)
+       :border 0
+       :background :transparent
+       :color :#585856
+       (segoe-ui)
+       (transition [:all :0.2s :ease-out])
+
+       ["&:hover"
+        :color :#CF2F0B]
+
+       ["&:disabled"
+        :color :#E8E8E8]
+      ]]
      ]
+
+    ; Meta
+    [:p.meta
+     :display :inline-block
+     :position :absolute
+     :bottom (px vr)
+     :right 0
+     :margin 0
+     :padding (px vr)
+     :padding-bottom 0
+     :color :#C8C8C8]
+
+    ; Footer
+    [:footer
+     :margin :50px
+     :margin-left (px (+ 50 vr))
+     :color (hsla 0 0 0 0.25)
+     (font-size 1.3)]
 
     ; Muted
     [:.muted
-     :color (hsl 0 0 10)
-     (text-shadow [0 :-1px :#000] [0 :1px (hsla 0 0 100 0.1)])
-     ]
-    
+     :color :#E8E8E8]
+
+    ; Hidden
+    [:.hidden
+     :display "none !important"]
+
+    ; Selection
+    ["::-moz-selection"
+     :background-color :#d6d6d6]
+    ["::selection"
+     :background-color :#d6d6d6]
+
     ))
 

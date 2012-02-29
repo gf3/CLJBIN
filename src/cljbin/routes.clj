@@ -41,7 +41,7 @@
     file-info/wrap-file-info
     (reload/wrap-reload-modified ["src"])
     ; anti-forgery/wrap-anti-forgery
-    (cssgen/wrap-cssgen cssgen/css-req?)
+    ; (cssgen/wrap-cssgen cssgen/css-req?)
     handler/site
     middleware/wrap-http-serialization
     stacktrace/wrap-stacktrace))

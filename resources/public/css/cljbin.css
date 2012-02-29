@@ -71,12 +71,11 @@ h2 {
 }
 header[role=banner] {
   margin-top: 50px;
-  margin-left: 50px;
-  margin-left: 68.2px;
 }
 section#paste {
   position: relative;
-  margin: 50px;
+  margin-top: 50px;
+  margin-bottom: 50px;
   padding: 0;
   background-color: #FBFBFB;
   -moz-box-shadow: 0 0 10px hsla(0.0,0%,0%,0.25098039215686274);
@@ -211,8 +210,8 @@ p.meta {
     margin: 0;
   }
 footer {
-  margin: 50px;
-  margin-left: 68.2px;
+  margin-top: 50px;
+  margin-bottom: 50px;
   color: hsla(0.0,0%,0%,0.25098039215686274);
   font-size: 18.2px;
 }

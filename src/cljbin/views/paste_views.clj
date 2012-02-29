@@ -40,6 +40,12 @@
                 [:li
                  [:pre (escape-html out)]])]
 
+             (if (:fork-of paste)
+               [:div#fork-of
+                [:p
+                 "Fork of "
+                 (link-to (str "/paste/" (:fork-of paste)) (escape-html (str "#<Paste " (:fork-of paste) ">")))]])
+
              [:p.meta
               "Pasted "
               (in-days (interval (from-date (:created-at paste)) (now)))
@@ -49,12 +55,6 @@
                  "Expires in "
                  (in-days (interval (now) (from-date (:expires-at paste))))
                  " days."])]
-
-             (if (:fork-of paste)
-               [:div#fork-of
-                [:p
-                 "Fork of "
-                 (link-to (str "/paste/" (:fork-of paste)) (escape-html (str "#<Paste " (:fork-of paste) ">")))]])
 
              [:ul.actions
               [:li.paste-action.hidden (submit-button "Paste")]  

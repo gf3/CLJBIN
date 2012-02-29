@@ -350,15 +350,14 @@
 
     ; Header
     ["header[role=banner]"
-     :margin-top :50px
-     :margin-left :50px
-     :margin-left (px (+ 50 vr))
+     :margin-top  :50px
      ]
 
     ; Paste
     [:section#paste
      :position :relative
-     :margin :50px
+     :margin-top    :50px
+     :margin-bottom :50px
      :padding 0
      :background-color :#FBFBFB
      (box-shadow [0 0 :10px (hsla 0 0 0 0.25)])
@@ -482,8 +481,8 @@
 
     ; Footer
     [:footer
-     :margin :50px
-     :margin-left (px (+ 50 vr))
+     :margin-top :50px
+     :margin-bottom :50px
      :color (hsla 0 0 0 0.25)
      (font-size 1.3)]
 

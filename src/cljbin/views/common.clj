@@ -29,6 +29,7 @@
             (include-css "http://fonts.googleapis.com/css?family=Droid+Sans+Mono")
             (include-css "/css/normalize.css")
             (include-css "/css/cljbin.css")
+            (include-css "/css/media_queries.css")
             (include-css "/css/shThemeTomorrow.css")
             (include-css "/css/shClojureExtra.css")
             ]

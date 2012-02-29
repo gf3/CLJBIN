@@ -12,7 +12,7 @@
 (defn make-mongo-conn [config]
   (make-connection "cljbin"
                    :host (or (:host config) "127.0.0.1")
-                   :port (or (:port config) 27017)))
+                   :port (or (Integer. (:port config)) 27017)))
 
 (defn start []
   (load-config)

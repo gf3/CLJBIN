@@ -2,6 +2,7 @@
   /* background-color: white !important; */
 }
 .syntaxhighlighter .line {
+  min-height: 20px;
   -moz-transition: all 0.2s ease-out;
   -ms-transition: all 0.2s ease-out;
   -o-transition: all 0.2s ease-out;
@@ -28,14 +29,13 @@
   color: black !important;
 }
 .syntaxhighlighter .gutter {
+  margin: 0;
+  padding: 0;
   color: #afafaf !important;
 }
 .syntaxhighlighter .gutter .line {
-  border-right: 3px solid #6ce26c !important;
 }
 .syntaxhighlighter .gutter .line.highlighted {
-  background-color: #6ce26c !important;
-  color: white !important;
 }
 .syntaxhighlighter.printing .line .content {
   border: none !important;

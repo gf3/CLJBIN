@@ -39,6 +39,7 @@
              content]
             [:footer
              [:p "&#955; Clojure Bin"]]
+            (include-js "/js/vendor/zepto.min.js")
             (include-js "/js/vendor/shCore.js")
             (include-js "/js/vendor/shBrushClojure.js")
             (include-js "/js/main.js")])))

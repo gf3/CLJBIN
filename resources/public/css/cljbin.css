@@ -42,7 +42,16 @@ a {
     color: #CF2F0B;
     text-decoration: none;
   }
-  a:hover {
+  a:visited {
+    color: #CF2F0B;
+    text-decoration: none;
+  }
+  a:hover, a:focus {
+    color: #861F07;
+    text-decoration: none;
+  }
+  a:active {
+    color: #CF2F0B;
     text-decoration: none;
   }
 h1, h2, h3, h4, h5, h6 {
@@ -103,16 +112,14 @@ form {
     font-family: 'Droid Sans Mono', monospace, sans-serif;
     font-style: normal;
     font-weight: 400;
-    -moz-transition: all 0.2s ease-out;
-    -ms-transition: all 0.2s ease-out;
-    -o-transition: all 0.2s ease-out;
-    -webkit-transition: all 0.2s ease-out;
-    transition: all 0.2s ease-out;
     -webkit-appearance: none;
   }
     form textarea:focus {
       outline: none;
     }
+  form textarea + div > .syntaxhighlighter {
+    border-top: 1px solid #E9E9E9;
+  }
   form input[type=submit], form button {
     -webkit-appearance: none;
   }
@@ -196,6 +203,13 @@ p.meta {
   padding-bottom: 0;
   color: #C8C8C8;
 }
+#fork-of {
+  padding: 18.2px;
+  border-top: 1px solid #E9E9E9;
+}
+  #fork-of p {
+    margin: 0;
+  }
 footer {
   margin: 50px;
   margin-left: 68.2px;

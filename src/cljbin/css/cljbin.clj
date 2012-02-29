@@ -319,9 +319,18 @@
       :color :#CF2F0B
       :text-decoration :none]
 
-     ["&:hover"
+     ["&:visited"
+      :color :#CF2F0B
+      :text-decoration :none]
+
+     ["&:hover, &:focus"
+      :color (rgb-hexstr (darken (create-color "#CF2F0B") 15))
       :text-decoration :none
-      ]]
+      ]
+
+     ["&:active"
+      :color :#CF2F0B
+      :text-decoration :none]]
 
     ; Headings
     ["h1, h2, h3, h4, h5, h6"
@@ -372,11 +381,15 @@
       :resize :none
       :color :#585856
       (monospace)
-      (transition [:all :0.2s :ease-out])
+      ; (transition [:all :0.2s :ease-out])
       :-webkit-appearance :none
 
       ["&:focus"
        :outline :none]
+      ]
+
+     ["textarea + div > .syntaxhighlighter"
+      :border-top [(px 1) :solid :#E9E9E9]
       ]
 
      ["input[type=submit], button"
@@ -458,6 +471,14 @@
      :padding (px vr)
      :padding-bottom 0
      :color :#C8C8C8]
+
+    ; Fork Of
+    [:#fork-of
+     :padding (px vr)
+     :border-top [(px 1) :solid :#E9E9E9]
+
+     [:p
+      :margin 0]]
 
     ; Footer
     [:footer

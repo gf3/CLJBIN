@@ -3,7 +3,7 @@
             [somnium.congomongo :as cm])
   (:import java.util.Date))
 
-(def ^{:private true} valid-keys [:code :output :fork-of :private :session :expires-at :created-at :updated-at])
+(def ^{:private true} valid-keys [:code :output :fork-of :session :created-at :updated-at])
 
 (defn create! [paste]
   (if paste

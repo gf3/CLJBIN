@@ -5,7 +5,8 @@
         cljbin.actions.paste-actions
         cljbin.views.common
         hiccup.core
-        hiccup.form-helpers)
+        hiccup.form-helpers 
+        hiccup.page-helpers)
   (:require [ring.util.response :as response]))
 
 (defview #'index :html
@@ -30,6 +31,7 @@
              (hidden-field 'fork-of (:_id paste))
 
              [:div.code
+              [:textarea#code.hidden {:name "code" :placeholder "(paste :clojure \"code\")"} (:code paste)] 
               [:pre {:class "brush: clojure"}
                (escape-html (:code paste))]]
 
@@ -48,9 +50,15 @@
                  (in-days (interval (now) (from-date (:expires-at paste))))
                  " days."])]
 
-             [:ul.actions.hidden
-              [:li
-               [:a {:href "#"} "Fork"]]])
+             (if (:fork-of paste)
+               [:div#fork-of
+                [:p
+                 "Fork of "
+                 (link-to (str "/paste/" (:fork-of paste)) (escape-html (str "#<Paste " (:fork-of paste) ">")))]])
+
+             [:ul.actions
+              [:li.paste-action.hidden (submit-button "Paste")]  
+              [:li.fork-action [:a {:href "#"} "Fork"]]])
      ))
 
 (defview #'put :html

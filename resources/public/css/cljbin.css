@@ -166,6 +166,7 @@ ul.actions {
   margin: 0;
   padding: 0 18.2px;
   border-left: 1px solid #E9E9E9;
+  background-color: #FBFBFB;
   list-style-type: none;
 }
   ul.actions li {
@@ -173,9 +174,8 @@ ul.actions {
   }
     ul.actions li a, ul.actions li input {
       display: inline-block;
-      padding: 18.2px;
+      padding: 20px 18.2px;
       border: 0;
-      background: transparent;
       color: #585856;
       font-family: 'SegoeUINormal', sans-serif;
       font-style: normal;

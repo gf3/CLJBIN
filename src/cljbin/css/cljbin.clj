@@ -380,7 +380,6 @@
       :resize :none
       :color :#585856
       (monospace)
-      ; (transition [:all :0.2s :ease-out])
       :-webkit-appearance :none
 
       ["&:focus"
@@ -438,6 +437,7 @@
      :margin 0
      :padding [0 (px vr)]
      :border-left [(px 1) :solid :#E9E9E9]
+     :background-color :#FBFBFB
      :list-style-type :none
 
      [:li
@@ -445,9 +445,8 @@
 
       ["a, input"
        :display :inline-block
-       :padding (px vr)
+       :padding [:20px (px vr)]
        :border 0
-       :background :transparent
        :color :#585856
        (segoe-ui)
        (transition [:all :0.2s :ease-out])

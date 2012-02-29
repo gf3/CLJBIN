@@ -9,6 +9,9 @@
   -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
   background-color: transparent;
+  font-family: 'Droid Sans Mono', monospace, sans-serif;
+  font-style: normal;
+  font-weight: 400;
 }
 .syntaxhighlighter .line:hover {
   background-color: #efefef;

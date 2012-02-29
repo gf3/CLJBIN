@@ -19,7 +19,7 @@
 (defn start []
   (load-config)
   (set-environment! :development)
-  (let [config (split-mongo-url (or (System/getenv "MONGOHQ_URL") ""))]
+  (let [config (split-mongo-url (or (System/getenv "MONGOLAB_URI") ""))]
     (set-connection! (make-mongo-conn config))
     (if (and (:user config) (:pass config))
       (do

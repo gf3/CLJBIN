@@ -176,6 +176,7 @@ ul.actions {
       display: inline-block;
       padding: 20px 18.2px;
       border: 0;
+      background-color: transparent;
       color: #585856;
       font-family: 'SegoeUINormal', sans-serif;
       font-style: normal;

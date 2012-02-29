@@ -23,7 +23,7 @@
 
 (defn- execute [sb writer expr]
   (try
-    (sb expr {#'*out* writer})
+    (pr-str (sb expr {#'*out* writer}))
     (catch TimeoutException _ "Execution timed out!")
     (catch Exception e (-> e root-cause str))))
 

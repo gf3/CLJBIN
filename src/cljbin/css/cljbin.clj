@@ -447,6 +447,7 @@
        :display :inline-block
        :padding [:20px (px vr)]
        :border 0
+       :background-color :transparent 
        :color :#585856
        (segoe-ui)
        (transition [:all :0.2s :ease-out])

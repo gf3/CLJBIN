@@ -3,16 +3,25 @@
         somnium.congomongo)
   (:require (cljbin [http :as http])))
 
-(def mongo-conn 
+(defn split-mongo-url [url]
+  "Parses mongodb url from heroku, eg. mongodb://user:pass@localhost:1234/db"
+  (let [matcher (re-matcher #"^.*://(.*?):(.*?)@(.*?):(\d+)/(.*)$" url)]
+    (when (.find matcher)
+      (zipmap [:match :user :pass :host :port :db] (re-groups matcher)))))
+
+(defn make-mongo-conn [config]
   (make-connection "cljbin"
-                   :host "127.0.0.1"
-                   :port 27017))
+                   :host (or (:host config) "127.0.0.1")
+                   :port (or (:port config) 27017)))
 
 (defn start []
   (load-config)
   (set-environment! :development)
-  (set-connection! mongo-conn)
-  (let [port (or (config :http :port) 8082)]
+  (let [config (split-mongo-url (or (System/getenv "MONGOHQ_URL") ""))]
+    (set-connection! (make-mongo-conn config))
+    (if (and (:user config) (:pass config))
+      (authenticate (:user config) (:pass config))))
+  (let [port (or (System/getenv "PORT") (config :http :port) 8082)]
     (println (format "Starting server on port: %d" port))
     (http/start port))
   @(promise))

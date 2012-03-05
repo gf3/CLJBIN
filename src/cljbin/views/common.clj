@@ -39,7 +39,11 @@
             [:section#paste
              content]
             [:footer
-             [:p "&#955; Clojure Bin"]]
+             [:p
+              "&#955; Clojure Paste Bin with Evaluation. "
+              (link-to "https://github.com/gf3/CLJBIN" "Source on GitHub")
+              "."
+              ]]
             (include-js "/js/vendor/zepto.min.js")
             (include-js "/js/vendor/shCore.js")
             (include-js "/js/vendor/shBrushClojure.js")

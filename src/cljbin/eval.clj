@@ -21,9 +21,27 @@
                     (use 'clojure.repl 'clojure.set 'clojure.test)
                     (require '[clojure.string :as string]))))
 
+(defn- truncate [n xs]
+  (cond
+    (coll? xs) (if (seq? xs)
+                 (take n xs)
+                 (into (empty xs) (take n xs)))
+    (string? xs) (apply str (take n xs))
+    :else xs))
+
+(defn- pr-str-ellipsis [n xs]
+  (let [k (truncate (+ n 1) xs)]
+    (if (or (coll? xs) (string? xs))
+      (if (> (count k) n)
+        (str
+          (apply str (drop-last (pr-str k)))
+          "...")
+        (pr-str k))
+      (pr-str k))))
+
 (defn- execute [sb writer expr]
   (try
-    (pr-str (sb expr {#'*out* writer}))
+    (pr-str-ellipsis 512 (sb expr {#'*out* writer}))
     (catch TimeoutException _ "Execution timed out!")
     (catch Exception e (-> e root-cause str))))
 
@@ -35,5 +53,5 @@
                 output (str writer)]]
       (do
         (.close writer)
-        (string/trim (str output res)))))) 
+        (string/trim (str output res))))))
 

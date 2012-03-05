@@ -33,15 +33,13 @@ void function() {
       e.preventDefault()
       this.value += '  '
     }
-    else if (this.selectionStart && this.setSelectionRange && e.keyCode === 8) {
-      if (this.selectionStart >= 2) {
-        if (this.value.substr(this.selectionStart - 2, 2) === '  ') {
-          e.preventDefault()
-          this.value = this.value.substring(0, this.selectionStart - 2) + this.value.substring(this.selectionStart)
-          this.setSelectionRange(this.selectionStart, this.selectionStart)
-        }
-      }
-    }
+    // else if (this.selectionStart && this.setSelectionRange && e.keyCode === 8)
+      // if (this.selectionStart >= 2)
+        // if (this.value.substr(this.selectionStart - 2, 2) === '  ') {
+          // e.preventDefault()
+          // this.value = this.value.substring(0, this.selectionStart - 2) + this.value.substring(this.selectionStart)
+          // this.setSelectionRange(this.selectionStart, this.selectionStart)
+        // }
   }).focus()
 }()
 

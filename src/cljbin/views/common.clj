@@ -1,5 +1,6 @@
 (ns cljbin.views.common
-  (:use hiccup.core
+  (:use (ciste [config :only [environment]])
+        hiccup.core
         hiccup.form-helpers
         hiccup.page-helpers
         ring.middleware.anti-forgery)
@@ -39,11 +40,14 @@
             [:script gajs]
             [:style css]
             (include-css "http://fonts.googleapis.com/css?family=Droid+Sans+Mono")
-            (include-css "/css/normalize.css")
-            (include-css "/css/cljbin.css")
-            (include-css "/css/media_queries.css")
-            (include-css "/css/shThemeTomorrow.css")
-            (include-css "/css/shClojureExtra.css")
+            (if (= :production (environment)) 
+              (include-css "/css/compiled/all.css")
+              (list
+                (include-css "/css/normalize.css")
+                (include-css "/css/cljbin.css")
+                (include-css "/css/media_queries.css")
+                (include-css "/css/shThemeTomorrow.css")
+                (include-css "/css/shClojureExtra.css")))
             ]
            [:body
             [:header {:role "banner"} 
@@ -56,10 +60,13 @@
               (link-to "https://github.com/gf3/CLJBIN" "Source on GitHub")
               "."
               ]]
-            (include-js "/js/vendor/zepto.min.js")
-            (include-js "/js/vendor/shCore.js")
-            (include-js "/js/vendor/shBrushClojure.js")
-            (include-js "/js/main.js")])))
+            (if (= :production (environment)) 
+              (include-js "/js/compiled/all.js")
+              (list
+                (include-js "/js/vendor/zepto.min.js")
+                (include-js "/js/vendor/shCore.js")
+                (include-js "/js/vendor/shBrushClojure.js")
+                (include-js "/js/main.js")))])))
 
 (defn hidden-csrf-field []
   (hidden-field '__anti-forgery-token *anti-forgery-token*))

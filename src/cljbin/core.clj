@@ -18,7 +18,9 @@
 
 (defn start []
   (load-config)
-  (set-environment! :development)
+  (set-environment! (if (= "PRODUCTION" (System/getenv "CISTE_ENV"))
+                      :production
+                      :development))
   (let [config (split-mongo-url (or (System/getenv "MONGOLAB_URI") ""))]
     (set-connection! (make-mongo-conn config))
     (if (and (:user config) (:pass config))

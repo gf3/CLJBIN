@@ -20,7 +20,9 @@
 
              [:ul.actions
               [:li.hidden [:a {:href "#"} "Run"]]
-              [:li (submit-button "Paste + Run")]])
+              [:li [:button
+                    [:i.icon-edit]
+                    "Paste + Run"]]])
     ))
 
 (defview #'show :html
@@ -57,8 +59,12 @@
                  " days."])]
 
              [:ul.actions
-              [:li.paste-action.hidden (submit-button "Paste + Run")]  
-              [:li.fork-action [:a {:href "#"} "Fork"]]])
+              [:li.paste-action.hidden [:button
+                                        [:i.icon-edit]
+                                        "Paste + Run"]]  
+              [:li.fork-action [:a {:href "#"}
+                                [:i.icon-random]
+                                "Fork"]]])
      ))
 
 (defview #'put :html

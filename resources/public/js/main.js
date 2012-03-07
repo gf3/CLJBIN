@@ -1,6 +1,16 @@
 void function() {
+  var i
+    , l
+    , $fork = document.querySelector('ul.actions li.fork-action a')
+    , $code = document.getElementById('code')
+    , slice = Array.prototype.slice
+
   // Hidden
-  $('.hidden').hide().removeClass('hidden')
+  var hidden = slice.call(document.getElementsByClassName('hidden'))
+  for (i = 0, l = hidden.length; i < l; i ++) {
+    hidden[i].style.display = 'none'
+    hidden[i].classList.remove('hidden')
+  }
 
   // Highlight Coads
   SyntaxHighlighter.defaults['gutter']      = false
@@ -9,37 +19,41 @@ void function() {
   SyntaxHighlighter.defaults['tab-size']    = 2
   SyntaxHighlighter.defaults['toolbar']     = false
   SyntaxHighlighter.all()
+  SyntaxHighlighter.highlight()
 
   // Fork
-  $('ul.actions li.fork-action a').click(function(e) {
-    var $this = $(this)
+  if ($fork)
+    $fork.addEventListener('click', function(e) {
+      var $this = e.currentTarget
 
-    $('#code')
-      .show()
+      $code.style.display = 'block'
+      $code.select()
 
-    $this
-      .hide()
-      .parents('ul').find('.paste-action').show()
+      $this.style.display = 'none'
+      $this.parentNode.parentNode.querySelector('.paste-action').style.display = 'inline'
 
-    e.preventDefault()
-  })
+      e.preventDefault()
+    }, false)
 
   // Run
   // TODO: It
 
   // Editor
-  $('#code').on('keydown', function(e) {
-    if (e.keyCode === 9) {
-      e.preventDefault()
-      this.value += '  '
-    }
-    // else if (this.selectionStart && this.setSelectionRange && e.keyCode === 8)
-      // if (this.selectionStart >= 2)
-        // if (this.value.substr(this.selectionStart - 2, 2) === '  ') {
-          // e.preventDefault()
-          // this.value = this.value.substring(0, this.selectionStart - 2) + this.value.substring(this.selectionStart)
-          // this.setSelectionRange(this.selectionStart, this.selectionStart)
-        // }
-  }).focus()
+  if ($code) {
+    $code.addEventListener('keydown', function(e) {
+      if (e.keyCode === 9) {
+        e.preventDefault()
+        this.value += '  '
+      }
+      // else if (this.selectionStart && this.setSelectionRange && e.keyCode === 8)
+        // if (this.selectionStart >= 2)
+          // if (this.value.substr(this.selectionStart - 2, 2) === '  ') {
+            // e.preventDefault()
+            // this.value = this.value.substring(0, this.selectionStart - 2) + this.value.substring(this.selectionStart)
+            // this.setSelectionRange(this.selectionStart, this.selectionStart)
+          // }
+    }, false)
+    $code.focus()
+  }
 }()
 

@@ -6,6 +6,7 @@ css:
 	  $(CSSDIR)/normalize.css \
 	  $(CSSDIR)/cljbin.css \
 	  $(CSSDIR)/media_queries.css \
+	  $(CSSDIR)/font-awesome.css \
 	  $(CSSDIR)/shThemeTomorrow.css \
 	  $(CSSDIR)/shClojureExtra.css \
 	  > $(CSSDIR)/compiled/all.css
@@ -13,7 +14,6 @@ css:
 
 js:
 	cat \
-	  $(JSDIR)/vendor/zepto.min.js \
 	  $(JSDIR)/vendor/shCore.js \
 	  $(JSDIR)/vendor/shBrushClojure.js \
 	  $(JSDIR)/main.js \

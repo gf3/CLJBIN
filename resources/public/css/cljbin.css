@@ -38,6 +38,9 @@ a {
   -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
+  a > i {
+    padding-right: 2px;
+  }
   a:link {
     color: #CF2F0B;
     text-decoration: none;
@@ -164,7 +167,7 @@ ul.actions {
   top: 0;
   right: 0;
   margin: 0;
-  padding: 0 18.2px;
+  padding: 0;
   border-left: 1px solid #E9E9E9;
   background-color: #FBFBFB;
   list-style-type: none;
@@ -172,7 +175,7 @@ ul.actions {
   ul.actions li {
     display: inline;
   }
-    ul.actions li a, ul.actions li input {
+    ul.actions li a, ul.actions li input, ul.actions li button {
       display: inline-block;
       padding: 20px 18.2px;
       border: 0;
@@ -186,11 +189,15 @@ ul.actions {
       -o-transition: all 0.2s ease-out;
       -webkit-transition: all 0.2s ease-out;
       transition: all 0.2s ease-out;
+      -webkit-appearance: none;
     }
-      ul.actions li a:hover, ul.actions li input:hover {
+      ul.actions li a > i, ul.actions li input > i, ul.actions li button > i {
+        padding-right: 4px;
+      }
+      ul.actions li a:hover, ul.actions li input:hover, ul.actions li button:hover {
         color: #CF2F0B;
       }
-      ul.actions li a:disabled, ul.actions li input:disabled {
+      ul.actions li a:disabled, ul.actions li input:disabled, ul.actions li button:disabled {
         color: #E8E8E8;
       }
 p.meta {

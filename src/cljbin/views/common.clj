@@ -46,6 +46,7 @@
                 (include-css "/css/normalize.css")
                 (include-css "/css/cljbin.css")
                 (include-css "/css/media_queries.css")
+                (include-css "/css/font-awesome.css")
                 (include-css "/css/shThemeTomorrow.css")
                 (include-css "/css/shClojureExtra.css")))
             ]
@@ -63,7 +64,6 @@
             (if (= :production (environment)) 
               (include-js "/js/compiled/all.js")
               (list
-                (include-js "/js/vendor/zepto.min.js")
                 (include-js "/js/vendor/shCore.js")
                 (include-js "/js/vendor/shBrushClojure.js")
                 (include-js "/js/main.js")))])))

@@ -315,6 +315,9 @@
     [:a
      (transition [:all :0.2s :ease-out])
 
+     ["> i"
+      :padding-right :2px]
+
      ["&:link"
       :color :#CF2F0B
       :text-decoration :none]
@@ -435,7 +438,7 @@
      :top 0
      :right 0
      :margin 0
-     :padding [0 (px vr)]
+     :padding 0 
      :border-left [(px 1) :solid :#E9E9E9]
      :background-color :#FBFBFB
      :list-style-type :none
@@ -443,7 +446,7 @@
      [:li
       :display :inline
 
-      ["a, input"
+      ["a, input, button"
        :display :inline-block
        :padding [:20px (px vr)]
        :border 0
@@ -451,6 +454,10 @@
        :color :#585856
        (segoe-ui)
        (transition [:all :0.2s :ease-out])
+       :-webkit-appearance :none
+
+       ["> i"
+        :padding-right :4px]
 
        ["&:hover"
         :color :#CF2F0B]
